@@ -55,7 +55,7 @@ const LoginPage = () => {
           }
           // Navigate based on the role/
           if (userInfo.role === "TEACHER") {
-            navigate("/faculty");
+            navigate("/teacher");
           } else if (userInfo.role === "STUDENT") {
             navigate("/student");
           }

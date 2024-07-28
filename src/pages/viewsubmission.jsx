@@ -151,7 +151,7 @@ function ViewSubmissions() {
   return (
     <div>
       <button
-        onClick={() => navigate("/faculty")}
+        onClick={() => navigate("/teacher")}
         style={{
           position: "absolute",
           top: "10px",
