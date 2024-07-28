@@ -7,6 +7,7 @@ import TeacherPage from "./pages/teacher";
 import CreateSubmission from "./pages/createsubmission";
 import MyAssignments from "./pages/myassignments";
 import ViewSubmission from "./pages/viewsubmission";
+import StudentSubmissions from "./pages/studentsubmissions";
 import "./index.css";
 import App from "./App";
 
@@ -21,6 +22,7 @@ root.render(
         <Route path="createsubmission" element={<CreateSubmission />} />
         <Route path="viewsubmission" element={<ViewSubmission />} />
         <Route path="myassignments" element={<MyAssignments />} />
+        <Route path="studentsubmissions" element={<StudentSubmissions />} />
       </Route>
     </Routes>
   </Router>

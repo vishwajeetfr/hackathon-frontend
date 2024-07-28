@@ -155,6 +155,13 @@ function StudentPage() {
       >
         View Assignments
       </button>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => navigate("/studentsubmissions")}
+      >
+        My Submission
+      </Button>
 
       {viewAssignments && (
         <div style={{ marginTop: "20px" }}>

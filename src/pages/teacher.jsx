@@ -9,7 +9,15 @@ import {
   CardMedia,
   Typography,
   Button,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Box,
+  CircularProgress,
   Link,
+  Alert,
 } from "@mui/material";
 
 function TeacherPage() {
@@ -322,119 +330,187 @@ function TeacherPage() {
       >
         View Assignments
       </button>
+      <button
+        onClick={() => navigate("/myassignments")}
+        style={{
+          marginLeft: "10px",
+          padding: "10px 20px",
+          backgroundColor: "dodgerblue",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        Assigments/Submissions
+      </button>
 
       {viewSection === "addAssignment" && (
-        <div>
-          <h2>Add New Assignment</h2>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Title:
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </label>
-            <br />
-            <label>
-              Description:
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </label>
-            <br />
-            <label>
-              Due Date:
-              <DatePicker
-                selected={dueDate}
-                onChange={(date) => setDueDate(date)}
-              />
-            </label>
-            <br />
-            <label>
-              Attachment URL:
-              <input
-                type="text"
-                value={attachmentUrl}
-                onChange={(e) => setAttachmentUrl(e.target.value)}
-              />
-            </label>
-            <br />
-            <label>
-              Class:
-              <select
-                value={classType}
-                onChange={(e) => setClassType(e.target.value)}
-              >
-                <option value="11th">11th</option>
-                <option value="12th">12th</option>
-              </select>
-            </label>
-            <br />
-            <button type="submit" disabled={loading}>
-              {loading ? "Submitting..." : "Submit"}
-            </button>
-          </form>
-          {feedback && <p>{feedback}</p>}
-        </div>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            mt: 3,
+            width: "100%",
+            maxWidth: 600,
+            mx: "auto",
+            p: 2,
+            border: "1px solid #ccc",
+            borderRadius: 2,
+            boxShadow: 2,
+            backgroundColor: "#ffffff",
+          }}
+        >
+          <Typography variant="h4" component="h2" gutterBottom>
+            Add New Assignment
+          </Typography>
+          <TextField
+            label="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            fullWidth
+            required
+          />
+          <TextField
+            label="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            fullWidth
+            multiline
+            rows={4}
+            required
+          />
+          <FormControl fullWidth required>
+            <DatePicker
+              selected={dueDate}
+              onChange={(date) => setDueDate(date)}
+              customInput={<TextField label="Due Date" fullWidth required />}
+            />
+          </FormControl>
+          <TextField
+            label="Attachment URL"
+            value={attachmentUrl}
+            onChange={(e) => setAttachmentUrl(e.target.value)}
+            fullWidth
+          />
+          <FormControl fullWidth required>
+            <InputLabel id="class-type-label"></InputLabel>
+            <Select
+              labelId="class-type-label"
+              value={classType}
+              onChange={(e) => setClassType(e.target.value)}
+              fullWidth
+              required
+            >
+              <MenuItem value="11th">11th</MenuItem>
+              <MenuItem value="12th">12th</MenuItem>
+            </Select>
+          </FormControl>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? <CircularProgress size={24} /> : "Submit"}
+            </Button>
+          </Box>
+          {feedback && (
+            <Alert
+              severity={feedback.includes("successfully") ? "success" : "error"}
+            >
+              {feedback}
+            </Alert>
+          )}
+        </Box>
       )}
 
       {viewSection === "updateAssignment" && (
-        <div>
-          <h2>Update Assignment</h2>
-          <form onSubmit={handleUpdateSubmit}>
-            <label>
-              Title:
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </label>
-            <br />
-            <label>
-              Description:
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </label>
-            <br />
-            <label>
-              Due Date:
-              <DatePicker
-                selected={dueDate}
-                onChange={(date) => setDueDate(date)}
-              />
-            </label>
-            <br />
-            <label>
-              Attachment URL:
-              <input
-                type="text"
-                value={attachmentUrl}
-                onChange={(e) => setAttachmentUrl(e.target.value)}
-              />
-            </label>
-            <br />
-            <label>
-              Class:
-              <select
-                value={classType}
-                onChange={(e) => setClassType(e.target.value)}
-              >
-                <option value="11th">11th</option>
-                <option value="12th">12th</option>
-              </select>
-            </label>
-            <br />
-            <button type="submit" disabled={loading}>
-              {loading ? "Updating..." : "Update"}
-            </button>
-          </form>
-          {feedback && <p>{feedback}</p>}
-        </div>
+        <Box
+          component="form"
+          onSubmit={handleUpdateSubmit}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            mt: 3,
+            width: "100%",
+            maxWidth: 600,
+            mx: "auto",
+            p: 2,
+            border: "1px solid #ccc",
+            borderRadius: 2,
+            boxShadow: 2,
+            backgroundColor: "#ffffff",
+          }}
+        >
+          <Typography variant="h4" component="h2" gutterBottom>
+            Update Assignment
+          </Typography>
+          <TextField
+            label="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            fullWidth
+            required
+          />
+          <TextField
+            label="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            fullWidth
+            multiline
+            rows={4}
+            required
+          />
+          <FormControl fullWidth required>
+            <DatePicker
+              selected={dueDate}
+              onChange={(date) => setDueDate(date)}
+              customInput={<TextField label="Due Date" fullWidth required />}
+            />
+          </FormControl>
+          <TextField
+            label="Attachment URL"
+            value={attachmentUrl}
+            onChange={(e) => setAttachmentUrl(e.target.value)}
+            fullWidth
+          />
+          <FormControl fullWidth required>
+            <InputLabel id="class-type-label">Class</InputLabel>
+            <Select
+              labelId="class-type-label"
+              value={classType}
+              onChange={(e) => setClassType(e.target.value)}
+              fullWidth
+              required
+            >
+              <MenuItem value="11th">11th</MenuItem>
+              <MenuItem value="12th">12th</MenuItem>
+            </Select>
+          </FormControl>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? <CircularProgress size={24} /> : "Update"}
+            </Button>
+          </Box>
+          {feedback && (
+            <Alert
+              severity={feedback.includes("successfully") ? "success" : "error"}
+            >
+              {feedback}
+            </Alert>
+          )}
+        </Box>
       )}
 
       {viewSection === "viewAssignments" && (
